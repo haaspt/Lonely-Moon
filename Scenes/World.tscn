@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scripts/World.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/AstroBody.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Moon.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Sun.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/starfield.jpeg" type="Texture" id=5]
+
+[node name="World" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Background" type="TextureRect" parent="."]
+margin_left = -500000.0
+margin_top = -500000.0
+margin_right = 500000.0
+margin_bottom = 500000.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 2
+
+[node name="Sun" parent="." instance=ExtResource( 4 )]
+rotation = 330.715
+body_mass = 50000
+rotation_speed = 5.0
+
+[node name="AstroBody" parent="Sun" instance=ExtResource( 2 )]
+position = Vector2( -523, 1696 )
+rotation = 658.922
+body_mass = 6500.0
+rotation_speed = 5.0
+
+[node name="AstroBody3" parent="Sun/AstroBody" instance=ExtResource( 2 )]
+position = Vector2( 305, 396 )
+rotation = 1316.34
+body_mass = 900.0
+
+[node name="AstroBody2" parent="Sun" instance=ExtResource( 2 )]
+position = Vector2( 982, 749 )
+rotation = 1316.34
+body_radius = 40.0
+body_mass = 4000.0
+
+[node name="Moon" parent="." instance=ExtResource( 3 )]
+position = Vector2( -2, 1702 )
+speed = 10
+
+[node name="Camera2D" type="Camera2D" parent="Moon"]
+current = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+
+[connection signal="sun_collided_with" from="Sun" to="." method="_on_Sun_sun_collided_with"]

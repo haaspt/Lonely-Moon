@@ -1,0 +1,4 @@
+extends Node
+
+const GRAVITATIONAL_CONSTANT = 2
+const INFLUENCE_CUTOFF = 0.1
