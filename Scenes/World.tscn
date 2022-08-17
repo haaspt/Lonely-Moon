@@ -21,32 +21,33 @@ expand = true
 stretch_mode = 2
 
 [node name="Sun" parent="." instance=ExtResource( 4 )]
-rotation = 330.715
-body_mass = 50000
+rotation = 1358.87
+body_mass = 70000
 rotation_speed = 5.0
 
 [node name="AstroBody" parent="Sun" instance=ExtResource( 2 )]
 position = Vector2( -523, 1696 )
-rotation = 658.922
+rotation = 1686.96
 body_mass = 6500.0
 rotation_speed = 5.0
 
 [node name="AstroBody3" parent="Sun/AstroBody" instance=ExtResource( 2 )]
 position = Vector2( 305, 396 )
-rotation = 1316.34
+rotation = 4396.2
 body_mass = 900.0
 
 [node name="AstroBody2" parent="Sun" instance=ExtResource( 2 )]
 position = Vector2( 982, 749 )
-rotation = 1316.34
+rotation = 4396.2
 body_radius = 40.0
-body_mass = 4000.0
+body_mass = 12000.0
 
 [node name="Moon" parent="." instance=ExtResource( 3 )]
 position = Vector2( -2, 1702 )
 speed = 10
 
-[node name="Camera2D" type="Camera2D" parent="Moon"]
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( -2, 1702 )
 current = true
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
