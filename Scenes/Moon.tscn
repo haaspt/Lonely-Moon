@@ -19,3 +19,10 @@ shape = SubResource( 1 )
 position = Vector2( 0, 4 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+visible = false
+amount = 20
+lifetime = 12.0
+local_coords = false
+gravity = Vector2( 0, 0 )
