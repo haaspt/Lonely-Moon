@@ -1,6 +1,6 @@
 extends Node
-
 class_name InfluenceBody
+# Container object for constructing hierarchies of influence objects
 
 var parent_body
 var child_body

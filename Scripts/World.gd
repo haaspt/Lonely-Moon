@@ -1,11 +1,11 @@
 extends Node2D
 
+const InfluenceBody := preload("res://Scripts/InfluenceBody.gd")
+
 export var debug: bool = true
 
 var camera_focus: Vector2
 var player_start_pos: Vector2
-
-var InfluenceBody := preload("res://Scripts/InfluenceBody.gd")
 var root_influence: InfluenceBody
 var current_influence: InfluenceBody setget set_current_influence
 
@@ -18,7 +18,7 @@ func connect_astrobody_signals(astro_bodies: Array) -> void:
 	for item in astro_bodies:
 		var astro_body := item as AstroBody
 		if astro_body:
-			connect_astrobody_signals(astro_body.get_children())
+			connect_astrobody_signals(astro_body.get_children())  # recursive search
 			astro_body.connect("influence_entered", self, "on_influence_entered", [astro_body])
 			astro_body.connect("influence_exited", self, "on_influence_exited", [astro_body])
 
@@ -26,6 +26,7 @@ func connect_astrobody_signals(astro_bodies: Array) -> void:
 func update_camera_focus() -> void:
 	var active_astro_body := moon.parent_body as AstroBody
 	if active_astro_body:
+		# Set camera focus to midpoint between player and active influence
 		camera_focus = (
 			moon.global_position
 			+ (active_astro_body.global_position - moon.global_position) / 2

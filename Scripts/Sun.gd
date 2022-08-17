@@ -1,9 +1,9 @@
 extends Node2D
 
+signal sun_collided_with(area)
+
 export var body_mass := 500
 export var rotation_speed := 0.5
-
-signal sun_collided_with(area)
 
 
 func _process(delta: float) -> void:
