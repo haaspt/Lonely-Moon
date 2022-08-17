@@ -5,6 +5,10 @@ export var debug: bool = true
 var camera_focus: Vector2
 var player_start_pos: Vector2
 
+var InfluenceBody := preload("res://Scripts/InfluenceBody.gd")
+var root_influence: InfluenceBody
+var current_influence: InfluenceBody setget set_current_influence
+
 onready var moon = $Moon
 onready var sun = $Sun
 onready var camera = $Camera2D
@@ -37,11 +41,20 @@ func reset_player_pos() -> void:
 	camera_focus = player_start_pos
 
 
+func set_current_influence(influence_body: InfluenceBody) -> void:
+	current_influence = influence_body
+	moon.parent_body = current_influence.body
+	if debug:
+		print("Influencing body is now ", influence_body.body.name)
+
+
 func _ready() -> void:
 	connect_astrobody_signals(sun.get_children())
 	player_start_pos = moon.global_position
 	moon.parent_body = sun
 	update_camera_focus()
+	root_influence = InfluenceBody.new(sun)
+	set_current_influence(root_influence)
 
 
 func _process(_delta: float) -> void:
@@ -52,21 +65,76 @@ func _process(_delta: float) -> void:
 			reset_player_pos()
 
 
-func reparent_camera(to_node: Node2D) -> void:
-	camera.get_parent().remove_child(camera)
-	to_node.add_child(camera)
+func get_node_hierarchy() -> Array:
+	var all_nodes_found := false
+	var node_list := []
+	var current_node := root_influence
+	while not all_nodes_found:
+		var node_info := {
+			"body": current_node.body.name,
+			"parent": current_node.parent_body.body.name if current_node.parent_body else null,
+			"child": current_node.child_body.body.name if current_node.child_body else null,
+		}
+		node_list.append(node_info)
+		if not current_node.child_body:
+			all_nodes_found = true
+		else:
+			current_node = current_node.child_body
+	return node_list
+
+
+func find_influence_body(node_to_find: Node) -> InfluenceBody:
+	var is_node_found := false
+	var current_body: InfluenceBody = root_influence
+	while not is_node_found:
+		if current_body.body == node_to_find:
+			is_node_found = true
+		else:
+			if current_body.child_body:
+				current_body = current_body.child_body
+				continue
+			else:
+				current_body = null
+				break
+	return current_body
+
+
+func add_influence_body(body_to_add: Node) -> InfluenceBody:
+	var new_influence_body := InfluenceBody.new(body_to_add)
+	new_influence_body.parent_body = current_influence
+	current_influence.child_body = new_influence_body
+	set_current_influence(new_influence_body)
+	if debug:
+		print(get_node_hierarchy())
+	return new_influence_body
+
+
+func remove_influence_body(node_to_remove: Node) -> void:
+	var body_to_remove := find_influence_body(node_to_remove)
+	if body_to_remove:
+		if body_to_remove.child_body:
+			body_to_remove.parent_body.child_body = body_to_remove.child_body
+			body_to_remove.child_body.parent_body = body_to_remove.parent_body
+		else:
+			body_to_remove.parent_body.child_body = null
+		if current_influence == body_to_remove:
+			set_current_influence(body_to_remove.parent_body)
+		body_to_remove.call_deferred("free")
+		if debug:
+			print(get_node_hierarchy())
+	else:
+		if debug:
+			print("Error! Could not find node in hierarchy: ", node_to_remove)
 
 
 func on_influence_entered(node: AstroBody) -> void:
-	moon.parent_body = node
-	#reparent_camera(node)
+	add_influence_body(node)
 
 
 func on_influence_exited(node: AstroBody) -> void:
-	if moon.parent_body == node:
-		moon.parent_body = sun
-		#reparent_camera(moon)
+	remove_influence_body(node)
 
 
 func _on_Sun_sun_collided_with(area: Node2D) -> void:
-	print("Game over!! ", area.name, " flew into the sun!")
+	if debug:
+		print("Game over!! ", area.name, " flew into the sun!")

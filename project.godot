@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "AstroBody",
 "language": "GDScript",
 "path": "res://Scripts/AstroBody.gd"
+}, {
+"base": "Node",
+"class": "InfluenceBody",
+"language": "GDScript",
+"path": "res://Scripts/InfluenceBody.gd"
 } ]
 _global_script_class_icons={
-"AstroBody": ""
+"AstroBody": "",
+"InfluenceBody": ""
 }
 
 [application]
