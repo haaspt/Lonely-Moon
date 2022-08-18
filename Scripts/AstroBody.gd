@@ -44,20 +44,20 @@ func calc_max_influence(mass: float) -> float:
 
 
 func _on_CollisionArea_area_entered(area: Area2D) -> void:
-	if area != influence_area:
+	if area.get_parent().is_in_group("player"):
 		emit_signal("radius_collided")
 
 
 func _on_InfluenceArea_area_entered(area: Area2D) -> void:
-	if area != collision_area:
+	if area.get_parent().is_in_group("player"):
 		emit_signal("influence_entered")
 
 
 func _on_CollisionArea_area_exited(area: Area2D) -> void:
-	if area != influence_area:
+	if area.get_parent().is_in_group("player"):
 		emit_signal("radius_exited")
 
 
 func _on_InfluenceArea_area_exited(area: Area2D) -> void:
-	if area != collision_area:
+	if area.get_parent().is_in_group("player"):
 		emit_signal("influence_exited")
