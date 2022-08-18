@@ -1,7 +1,5 @@
 extends Node2D
 
-const InfluenceBody := preload("res://Scripts/InfluenceBody.gd")
-
 export var debug: bool = true
 
 var camera_focus: Vector2
@@ -12,6 +10,21 @@ var current_influence: InfluenceBody setget set_current_influence
 onready var moon = $Moon
 onready var sun = $Sun
 onready var camera = $Camera2D
+
+
+class InfluenceBody:
+	var parent_body: InfluenceBody
+	var body: Node2D
+	var child_body: InfluenceBody
+
+	func _init(
+		init_body: Node2D,
+		init_parent_body: InfluenceBody = null,
+		init_child_body: InfluenceBody = null
+	):
+		self.parent_body = init_parent_body
+		self.body = init_body
+		self.child_body = init_child_body
 
 
 func connect_astrobody_signals(astro_bodies: Array) -> void:
