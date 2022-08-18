@@ -27,24 +27,23 @@ rotation_speed = 5.0
 
 [node name="AstroBody" parent="Sun" instance=ExtResource( 2 )]
 position = Vector2( -523, 1696 )
-rotation = 1686.96
+rotation = 1857.59
 body_mass = 6500.0
 rotation_speed = 5.0
 
 [node name="AstroBody3" parent="Sun/AstroBody" instance=ExtResource( 2 )]
 position = Vector2( 305, 396 )
-rotation = 4396.2
+rotation = 4898.09
 body_mass = 900.0
 
 [node name="AstroBody2" parent="Sun" instance=ExtResource( 2 )]
 position = Vector2( 982, 749 )
-rotation = 4396.2
+rotation = 4898.09
 body_radius = 40.0
 body_mass = 12000.0
 
 [node name="Moon" parent="." instance=ExtResource( 3 )]
 position = Vector2( -2, 1702 )
-speed = 10
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( -2, 1702 )

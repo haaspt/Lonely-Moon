@@ -21,6 +21,7 @@ func connect_astrobody_signals(astro_bodies: Array) -> void:
 			connect_astrobody_signals(astro_body.get_children())  # recursive search
 			astro_body.connect("influence_entered", self, "on_influence_entered", [astro_body])
 			astro_body.connect("influence_exited", self, "on_influence_exited", [astro_body])
+			astro_body.connect("radius_collided", self, "on_planet_collided_with", [astro_body])
 
 
 func update_camera_focus() -> void:
@@ -46,7 +47,7 @@ func set_current_influence(influence_body: InfluenceBody) -> void:
 	current_influence = influence_body
 	moon.parent_body = current_influence.body
 	if debug:
-		print("Influencing body is now ", influence_body.body.name)
+		print("Current influencing body: ", influence_body.body.name)
 
 
 func _ready() -> void:
@@ -134,6 +135,12 @@ func on_influence_entered(node: AstroBody) -> void:
 
 func on_influence_exited(node: AstroBody) -> void:
 	remove_influence_body(node)
+
+
+func on_planet_collided_with(planet: AstroBody) -> void:
+	moon.bounce_off_planet(planet)
+	if debug:
+		print("Collided with planet: ", planet.name)
 
 
 func _on_Sun_sun_collided_with(area: Node2D) -> void:
