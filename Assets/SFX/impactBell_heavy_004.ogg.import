@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/impactBell_heavy_004.ogg-cc109b9e3204b1fad9203bdb54b97b81.oggstr"
+
+[deps]
+
+source_file="res://Assets/SFX/impactBell_heavy_004.ogg"
+dest_files=[ "res://.import/impactBell_heavy_004.ogg-cc109b9e3204b1fad9203bdb54b97b81.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

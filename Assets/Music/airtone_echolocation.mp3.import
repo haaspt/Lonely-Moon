@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/airtone_echolocation.mp3-62704ade2914e8aca7f5b1d104a1b33e.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/airtone_echolocation.mp3"
+dest_files=[ "res://.import/airtone_echolocation.mp3-62704ade2914e8aca7f5b1d104a1b33e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
