@@ -22,14 +22,14 @@ func _process(delta: float) -> void:
 		move_vec += Vector2.RIGHT
 	#move_vec = move_vec.normalized()
 	if parent_body:
-		move_vec += calc_grav_accel(delta)
+		move_vec += calc_grav_accel()
 	global_position = global_position + move_vec * speed * delta
 	rotation_degrees = rotation_degrees + rotation_speed * delta
 	if sprite_shaking:
 		sprite.position = sprite_default_pos + Vector2(rand_range(-5, 5), rand_range(-5, 5))
 
 
-func calc_grav_accel(delta: float) -> Vector2:
+func calc_grav_accel() -> Vector2:
 	var parent_pos := parent_body.global_position
 	var to_parent_vec := parent_pos - self.global_position
 	var r := to_parent_vec.length()
