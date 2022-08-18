@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/World.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/AstroBody.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Moon.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Sun.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/starfield.jpeg" type="Texture" id=5]
+[ext_resource path="res://Assets/Music/airtone_spacedust.mp3" type="AudioStream" id=6]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -27,18 +28,18 @@ rotation_speed = 5.0
 
 [node name="AstroBody" parent="Sun" instance=ExtResource( 2 )]
 position = Vector2( -523, 1696 )
-rotation = 1857.59
+rotation = 1946.4
 body_mass = 6500.0
 rotation_speed = 5.0
 
 [node name="AstroBody3" parent="Sun/AstroBody" instance=ExtResource( 2 )]
 position = Vector2( 305, 396 )
-rotation = 4898.09
+rotation = 5163.2
 body_mass = 900.0
 
 [node name="AstroBody2" parent="Sun" instance=ExtResource( 2 )]
 position = Vector2( 982, 749 )
-rotation = 4898.09
+rotation = 5163.2
 body_radius = 40.0
 body_mass = 12000.0
 
@@ -50,5 +51,8 @@ position = Vector2( -2, 1702 )
 current = true
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
 
 [connection signal="sun_collided_with" from="Sun" to="." method="_on_Sun_sun_collided_with"]

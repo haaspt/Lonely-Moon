@@ -57,6 +57,7 @@ func _ready() -> void:
 	update_camera_focus()
 	root_influence = InfluenceBody.new(sun)
 	set_current_influence(root_influence)
+	$Music.play()
 
 
 func _process(_delta: float) -> void:
