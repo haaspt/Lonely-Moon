@@ -43,7 +43,14 @@ func update_camera_focus() -> void:
 		# Set camera focus to midpoint between player and active influence
 		camera_focus = (
 			moon.global_position
-			+ (active_astro_body.global_position - moon.global_position) / 2
+			+ (
+				(
+					active_astro_body.global_position
+					- active_astro_body.global_position.normalized() * active_astro_body.body_radius
+					- moon.global_position
+				)
+				/ 2
+			)
 		)
 	else:
 		camera_focus = moon.global_position
