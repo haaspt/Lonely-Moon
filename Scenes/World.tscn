@@ -35,20 +35,20 @@ rotation_speed = 5.0
 
 [node name="AstroBody" parent="Sun" instance=ExtResource( 2 )]
 position = Vector2( -1698.29, -250.017 )
-rotation = 3266.31
+rotation = 3343.43
 body_radius = 400.0
 body_mass = 69333.3
 rotation_speed = 5.0
 
 [node name="AstroBody3" parent="Sun/AstroBody" instance=ExtResource( 2 )]
 position = Vector2( 345.35, 687.608 )
-rotation = 9229.3
+rotation = 9469.99
 body_radius = 50.0
 body_mass = 3600.0
 
 [node name="AstroBody2" parent="Sun" instance=ExtResource( 2 )]
 position = Vector2( 2073.16, 2800.9 )
-rotation = 9228.48
+rotation = 9469.17
 body_radius = 900.0
 body_mass = 384000.0
 
@@ -86,18 +86,20 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -190.0
-margin_top = -32.0
-margin_right = 190.0
-margin_bottom = 32.0
+margin_left = -467.5
+margin_top = -79.0
+margin_right = 467.5
+margin_bottom = 79.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource( 7 )
 text = "Oh No, You Died!"
 align = 1
 valign = 1
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
 [connection signal="sun_collided_with" from="Sun" to="." method="_on_Sun_sun_collided_with"]
+[connection signal="hitpoints_exhausted" from="Moon" to="." method="_on_Moon_hitpoints_exhausted"]

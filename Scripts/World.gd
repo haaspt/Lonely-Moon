@@ -106,14 +106,15 @@ func _process(_delta: float) -> void:
 				+ str(round((sun.global_position - moon.global_position).length()))
 				+ "\n"
 			)
-			debug_string += "Act. Bod.: " + str(current_influence.body.name)
+			debug_string += "Act. Bod.: " + str(current_influence.body.name) + "\n"
+			debug_string += "Hit Pts.: " + str(moon.hit_points)
 			$HUD/DebugLabel.text = debug_string
 
 
 func kill_player(cause: String) -> void:
 	moon.call_deferred("free")
 	var cause_str: String = death_label_lookup[cause]
-	cause_str += "\nPress 'R' to try again!"
+	cause_str += "\n\nPress 'R' to try again!"
 	death_label.text = cause_str
 	death_label.visible = true
 
@@ -190,6 +191,7 @@ func on_influence_exited(node: AstroBody) -> void:
 
 func on_planet_collided_with(planet: AstroBody) -> void:
 	moon.bounce_off_planet(planet)
+	moon.dec_hit_points()
 	if debug:
 		print("Collided with planet: ", planet.name)
 
@@ -198,3 +200,7 @@ func _on_Sun_sun_collided_with(area: Node2D) -> void:
 	kill_player("sun")
 	if debug:
 		print("Game over!! ", area.name, " flew into the sun!")
+
+
+func _on_Moon_hitpoints_exhausted() -> void:
+	kill_player("planet")

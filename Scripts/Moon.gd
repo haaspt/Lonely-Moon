@@ -1,16 +1,24 @@
 extends Node2D
 
+signal hitpoints_exhausted
+
 const BOUNCE_FORCE = 1.025
 const GRAVITY_SCALE_EFFECT = 10
 
 export var speed := 10
 export var rotation_speed := 10
+export var total_hit_points: int = 4
 var parent_body: Node2D
 var initial_vel := Vector2.LEFT * 50
 var move_vec := initial_vel
 var sprite_shaking := false
+var hit_points: int setget set_hit_points
 onready var sprite := $Sprite
 onready var sprite_default_pos: Vector2 = sprite.position
+
+
+func _ready() -> void:
+	set_hit_points(total_hit_points)
 
 
 func _process(delta: float) -> void:
@@ -50,6 +58,16 @@ func bounce_off_planet(planet: Node2D) -> void:
 	var normal_vec := (self.global_position - planet.global_position).normalized()
 	move_vec = move_vec.bounce(normal_vec) * BOUNCE_FORCE
 	shake_sprite()
+
+
+func dec_hit_points() -> void:
+	set_hit_points(hit_points - 1)
+
+
+func set_hit_points(new_points: int) -> void:
+	hit_points = new_points
+	if hit_points == 0:
+		emit_signal("hitpoints_exhausted")
 
 
 func _on_ShakeTimer_timeout() -> void:
