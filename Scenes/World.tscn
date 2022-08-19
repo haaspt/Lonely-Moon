@@ -9,6 +9,7 @@
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
+camera_lean_amount = 200.0
 
 [node name="Background" type="TextureRect" parent="."]
 margin_left = -500000.0
@@ -23,26 +24,27 @@ stretch_mode = 2
 
 [node name="Sun" parent="." instance=ExtResource( 4 )]
 rotation = 1358.87
-body_mass = 70000
+body_mass = 105000
 rotation_speed = 5.0
 
 [node name="AstroBody" parent="Sun" instance=ExtResource( 2 )]
-position = Vector2( -523, 1696 )
-rotation = 2759.03
+position = Vector2( -1698.29, -250.017 )
+rotation = 2860.63
 body_radius = 400.0
-body_mass = 26000.0
+body_mass = 69333.3
 rotation_speed = 5.0
 
 [node name="AstroBody3" parent="Sun/AstroBody" instance=ExtResource( 2 )]
-position = Vector2( 286.148, 482.471 )
-rotation = 7601.59
-body_mass = 900.0
+position = Vector2( 345.35, 687.608 )
+rotation = 7913.7
+body_radius = 50.0
+body_mass = 3600.0
 
 [node name="AstroBody2" parent="Sun" instance=ExtResource( 2 )]
-position = Vector2( 2308.42, 2267.55 )
-rotation = 7601.59
+position = Vector2( 2073.16, 2800.9 )
+rotation = 7912.94
 body_radius = 900.0
-body_mass = 192000.0
+body_mass = 384000.0
 
 [node name="Moon" parent="." instance=ExtResource( 3 )]
 position = Vector2( -2, 1702 )

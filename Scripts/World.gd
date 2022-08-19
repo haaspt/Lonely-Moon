@@ -1,6 +1,7 @@
 extends Node2D
 
 export var debug: bool = true
+export var camera_lean_amount: float = 10.0
 
 var camera_focus: Vector2
 var player_start_pos: Vector2
@@ -40,18 +41,8 @@ func connect_astrobody_signals(astro_bodies: Array) -> void:
 func update_camera_focus() -> void:
 	var active_astro_body := moon.parent_body as AstroBody
 	if active_astro_body:
-		# Set camera focus to midpoint between player and active influence
-		camera_focus = (
-			moon.global_position
-			+ (
-				(
-					active_astro_body.global_position
-					- active_astro_body.global_position.normalized() * active_astro_body.body_radius
-					- moon.global_position
-				)
-				/ 2
-			)
-		)
+		var vector_towards_body: Vector2 = (active_astro_body.global_position - moon.global_position).normalized()
+		camera_focus = moon.global_position + (vector_towards_body * camera_lean_amount)
 	else:
 		camera_focus = moon.global_position
 
