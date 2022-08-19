@@ -6,7 +6,8 @@ const GRAVITY_SCALE_EFFECT = 10
 export var speed := 10
 export var rotation_speed := 10
 var parent_body: Node2D
-var move_vec := Vector2.ZERO
+var initial_vel := Vector2.LEFT * 50
+var move_vec := initial_vel
 var sprite_shaking := false
 onready var sprite := $Sprite
 onready var sprite_default_pos: Vector2 = sprite.position

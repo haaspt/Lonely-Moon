@@ -61,7 +61,7 @@ func reset_player_pos() -> void:
 		self.add_child(moon)
 		moon.parent_body = current_influence.body
 	moon.global_position = player_start_pos
-	moon.move_vec = Vector2.ZERO
+	moon.move_vec = moon.initial_vel
 	camera.global_position = player_start_pos
 	camera_focus = player_start_pos
 	death_label.visible = false
