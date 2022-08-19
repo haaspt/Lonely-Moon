@@ -13,7 +13,8 @@ var death_label_lookup := {
 	"space": "Oh no! You flew off into deep space!",
 	"planet": "Ooph! You crashed into a planet too many times!"
 }
-
+var default_zoom := Vector2(1.5, 1.5)
+var max_zoom := Vector2(4.5, 4.5)
 onready var moon = $Moon
 onready var sun = $Sun
 onready var camera = $Camera2D
@@ -97,6 +98,12 @@ func _process(_delta: float) -> void:
 				"Game over!! Flew into deep space!"
 	if Input.is_action_just_pressed("ui_reset"):
 		reset_player_pos()
+	if Input.is_action_just_pressed("ui_accept"):
+		var tween: SceneTreeTween = get_tree().create_tween()
+		tween.tween_property($Camera2D, "zoom", max_zoom, 0.5)
+	if Input.is_action_just_released("ui_accept"):
+		var tween: SceneTreeTween = get_tree().create_tween()
+		tween.tween_property($Camera2D, "zoom", default_zoom, 0.5)
 	if debug:
 		if get_node_or_null("Moon"):
 			var debug_string := ""
