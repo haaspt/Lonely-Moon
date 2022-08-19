@@ -73,6 +73,8 @@ func inc_hit_points() -> void:
 
 func set_hit_points(new_points: int) -> void:
 	hit_points = new_points
+	if hit_points < total_hit_points:
+		$HealthRegenTimer.start(4)
 	var lerp_val := float(hit_points) / float(total_hit_points)
 	var color := Color(1, lerp_val, lerp_val, 1)
 	sprite.modulate = color
@@ -88,3 +90,5 @@ func _on_ShakeTimer_timeout() -> void:
 func _on_HealthRegenTimer_timeout() -> void:
 	if hit_points < total_hit_points:
 		inc_hit_points()
+	else:
+		$HealthRegenTimer.stop()
