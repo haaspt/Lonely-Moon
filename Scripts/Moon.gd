@@ -1,6 +1,7 @@
 extends Node2D
 
 const BOUNCE_FORCE = 1.025
+const GRAVITY_SCALE_EFFECT = 10
 
 export var speed := 10
 export var rotation_speed := 10
@@ -22,7 +23,7 @@ func _process(delta: float) -> void:
 		move_vec += Vector2.RIGHT
 	#move_vec = move_vec.normalized()
 	if parent_body:
-		move_vec += calc_grav_accel()
+		move_vec += calc_grav_accel() * GRAVITY_SCALE_EFFECT
 	global_position = global_position + move_vec * speed * delta
 	rotation_degrees = rotation_degrees + rotation_speed * delta
 	if sprite_shaking:
