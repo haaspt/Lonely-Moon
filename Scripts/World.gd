@@ -17,7 +17,7 @@ var death_label_lookup := {
 onready var moon = $Moon
 onready var sun = $Sun
 onready var camera = $Camera2D
-onready var death_label = $Camera2D/HUD/CenterContainer/DeathLabel
+onready var death_label = $HUD/DeathLabel
 
 
 class InfluenceBody:
@@ -107,7 +107,7 @@ func _process(_delta: float) -> void:
 				+ "\n"
 			)
 			debug_string += "Act. Bod.: " + str(current_influence.body.name)
-			$Camera2D/HUD/DebugLabel.text = debug_string
+			$HUD/DebugLabel.text = debug_string
 
 
 func kill_player(cause: String) -> void:
