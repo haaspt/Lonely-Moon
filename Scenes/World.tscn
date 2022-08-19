@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/World.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/AstroBody.tscn" type="PackedScene" id=2]
@@ -6,6 +6,11 @@
 [ext_resource path="res://Scenes/Sun.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/starfield.jpeg" type="Texture" id=5]
 [ext_resource path="res://Assets/Music/airtone_spacedust.mp3" type="AudioStream" id=6]
+
+[sub_resource type="Environment" id=1]
+background_mode = 4
+tonemap_mode = 2
+glow_enabled = true
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -24,25 +29,25 @@ stretch_mode = 2
 
 [node name="Sun" parent="." instance=ExtResource( 4 )]
 rotation = 1358.87
-body_mass = 105000
+body_mass = 157500
 rotation_speed = 5.0
 
 [node name="AstroBody" parent="Sun" instance=ExtResource( 2 )]
 position = Vector2( -1698.29, -250.017 )
-rotation = 2860.63
+rotation = 3152.4
 body_radius = 400.0
 body_mass = 69333.3
 rotation_speed = 5.0
 
 [node name="AstroBody3" parent="Sun/AstroBody" instance=ExtResource( 2 )]
 position = Vector2( 345.35, 687.608 )
-rotation = 7913.7
+rotation = 8865.41
 body_radius = 50.0
 body_mass = 3600.0
 
 [node name="AstroBody2" parent="Sun" instance=ExtResource( 2 )]
 position = Vector2( 2073.16, 2800.9 )
-rotation = 7912.94
+rotation = 8864.59
 body_radius = 900.0
 body_mass = 384000.0
 
@@ -53,10 +58,44 @@ position = Vector2( -2, 1702 )
 position = Vector2( -2, 1702 )
 current = true
 zoom = Vector2( 1.5, 1.5 )
+limit_left = -10000
+limit_top = -10000
+limit_right = 10000
+limit_bottom = 10000
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 
+[node name="HUD" type="CanvasLayer" parent="Camera2D"]
+
+[node name="DebugLabel" type="Label" parent="Camera2D/HUD"]
+margin_right = 41.0
+margin_bottom = 14.0
+text = "Lorem"
+
+[node name="CenterContainer" type="CenterContainer" parent="Camera2D/HUD"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -55.0
+margin_top = -20.0
+margin_right = 55.0
+margin_bottom = 20.0
+
+[node name="DeathLabel" type="Label" parent="Camera2D/HUD/CenterContainer"]
+visible = false
+margin_top = 13.0
+margin_right = 110.0
+margin_bottom = 27.0
+text = "Oh No, You Died!"
+align = 1
+valign = 1
+
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+bus = "Background"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
 
 [connection signal="sun_collided_with" from="Sun" to="." method="_on_Sun_sun_collided_with"]

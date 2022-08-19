@@ -7,10 +7,17 @@ var camera_focus: Vector2
 var player_start_pos: Vector2
 var root_influence: InfluenceBody
 var current_influence: InfluenceBody setget set_current_influence
+var Moon := preload("res://Scenes/Moon.tscn")
+var death_label_lookup := {
+	"sun": "Ouch! You flew into the sun!",
+	"space": "Oh no! You flew off into deep space!",
+	"planet": "Ooph! You crashed into a planet too many times!"
+}
 
 onready var moon = $Moon
 onready var sun = $Sun
 onready var camera = $Camera2D
+onready var death_label = $Camera2D/HUD/CenterContainer/DeathLabel
 
 
 class InfluenceBody:
@@ -39,19 +46,25 @@ func connect_astrobody_signals(astro_bodies: Array) -> void:
 
 
 func update_camera_focus() -> void:
-	var active_astro_body := moon.parent_body as AstroBody
-	if active_astro_body:
-		var vector_towards_body: Vector2 = (active_astro_body.global_position - moon.global_position).normalized()
-		camera_focus = moon.global_position + (vector_towards_body * camera_lean_amount)
-	else:
-		camera_focus = moon.global_position
+	if get_node_or_null("Moon"):
+		var active_astro_body := moon.parent_body as AstroBody
+		if active_astro_body:
+			var vector_towards_body: Vector2 = (active_astro_body.global_position - moon.global_position).normalized()
+			camera_focus = moon.global_position + (vector_towards_body * camera_lean_amount)
+		else:
+			camera_focus = moon.global_position
 
 
 func reset_player_pos() -> void:
+	if not get_node_or_null("Moon"):
+		moon = Moon.instance()
+		self.add_child(moon)
+		moon.parent_body = current_influence.body
 	moon.global_position = player_start_pos
 	moon.move_vec = Vector2.ZERO
 	camera.global_position = player_start_pos
 	camera_focus = player_start_pos
+	death_label.visible = false
 
 
 func set_current_influence(influence_body: InfluenceBody) -> void:
@@ -62,6 +75,8 @@ func set_current_influence(influence_body: InfluenceBody) -> void:
 
 
 func _ready() -> void:
+	if not debug:
+		$HUD/DebugLabel.call_deferred("free")
 	connect_astrobody_signals(sun.get_children())
 	player_start_pos = moon.global_position
 	moon.parent_body = sun
@@ -74,9 +89,33 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	update_camera_focus()
 	camera.global_position = lerp(camera.global_position, camera_focus, 0.25)
+	if get_node_or_null("Moon"):
+		var dist_to_sun: float = (sun.global_position - moon.global_position).length()
+		if dist_to_sun >= 12000:
+			kill_player("space")
+			if debug:
+				"Game over!! Flew into deep space!"
+	if Input.is_action_just_pressed("ui_reset"):
+		reset_player_pos()
 	if debug:
-		if Input.is_action_just_pressed("ui_reset"):
-			reset_player_pos()
+		if get_node_or_null("Moon"):
+			var debug_string := ""
+			debug_string += "Vel: " + str(round(moon.move_vec.length())) + "\n"
+			debug_string += (
+				"Dist. to Sun: "
+				+ str(round((sun.global_position - moon.global_position).length()))
+				+ "\n"
+			)
+			debug_string += "Act. Bod.: " + str(current_influence.body.name)
+			$Camera2D/HUD/DebugLabel.text = debug_string
+
+
+func kill_player(cause: String) -> void:
+	moon.call_deferred("free")
+	var cause_str: String = death_label_lookup[cause]
+	cause_str += "\nPress 'R' to try again!"
+	death_label.text = cause_str
+	death_label.visible = true
 
 
 func get_node_hierarchy() -> Array:
@@ -156,5 +195,6 @@ func on_planet_collided_with(planet: AstroBody) -> void:
 
 
 func _on_Sun_sun_collided_with(area: Node2D) -> void:
+	kill_player("sun")
 	if debug:
 		print("Game over!! ", area.name, " flew into the sun!")
