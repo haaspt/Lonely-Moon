@@ -35,20 +35,20 @@ rotation_speed = 5.0
 
 [node name="AstroBody" parent="Sun" instance=ExtResource( 2 )]
 position = Vector2( -1698.29, -250.017 )
-rotation = 3243.78
+rotation = 3260.45
 body_radius = 400.0
 body_mass = 69333.3
 rotation_speed = 5.0
 
 [node name="AstroBody3" parent="Sun/AstroBody" instance=ExtResource( 2 )]
 position = Vector2( 345.35, 687.608 )
-rotation = 9161.03
+rotation = 9211.29
 body_radius = 50.0
 body_mass = 3600.0
 
 [node name="AstroBody2" parent="Sun" instance=ExtResource( 2 )]
 position = Vector2( 2073.16, 2800.9 )
-rotation = 9160.21
+rotation = 9210.47
 body_radius = 900.0
 body_mass = 384000.0
 
@@ -79,19 +79,6 @@ environment = SubResource( 1 )
 margin_right = 41.0
 margin_bottom = 14.0
 text = "Lorem"
-
-[node name="CenterContainer" type="CenterContainer" parent="HUD"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -190.0
-margin_top = -32.0
-margin_right = 190.0
-margin_bottom = 32.0
-__meta__ = {
-"_edit_use_anchors_": true
-}
 
 [node name="DeathLabel" type="Label" parent="HUD"]
 anchor_left = 0.5
