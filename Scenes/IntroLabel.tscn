@@ -1,10 +1,22 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Font/at01.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scripts/IntroLabel.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Font/at01.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.568149, 0.573624, 0.609375, 0.498039 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="DynamicFont" id=2]
+size = 125
+font_data = ExtResource( 3 )
 
 [node name="IntroLabel" type="Panel"]
 pause_mode = 2
@@ -17,20 +29,31 @@ margin_top = -268.0
 margin_right = 404.0
 margin_bottom = 292.0
 theme = SubResource( 1 )
+custom_styles/panel = SubResource( 3 )
 script = ExtResource( 2 )
 
-[node name="Label" type="Label" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -382.5
-margin_top = -266.5
+margin_top = -233.5
 margin_right = 382.5
-margin_bottom = 266.5
-text = "Lonely Moon
+margin_bottom = 233.5
 
-Explore space to find your planet!
+[node name="Title" type="Label" parent="VBoxContainer"]
+margin_right = 765.0
+margin_bottom = 100.0
+custom_fonts/font = SubResource( 2 )
+text = "Lonely Moon"
+align = 1
+
+[node name="Description" type="Label" parent="VBoxContainer"]
+margin_top = 104.0
+margin_right = 765.0
+margin_bottom = 503.0
+text = "Explore space to find your planet!
 
 Arrow Keys : Move
 Space Bar : Zoom out
