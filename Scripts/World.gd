@@ -4,7 +4,6 @@ export var debug: bool = true
 export var camera_lean_amount: float = 10.0
 
 var camera_focus: Vector2
-var player_start_pos: Vector2
 var root_influence: InfluenceBody
 var current_influence: InfluenceBody setget set_current_influence
 var Moon := preload("res://Scenes/Moon.tscn")
@@ -15,6 +14,7 @@ var death_label_lookup := {
 }
 var default_zoom := Vector2(1.5, 1.5)
 var max_zoom := Vector2(4.5, 4.5)
+onready var player_start_pos: Vector2 = $PlayerStartPos.global_position
 onready var moon = $Moon
 onready var sun = $Sun
 onready var camera = $Camera2D
@@ -61,6 +61,7 @@ func reset_player_pos() -> void:
 		moon = Moon.instance()
 		self.add_child(moon)
 		moon.parent_body = current_influence.body
+		moon.connect("hitpoints_exhausted", self, "_on_Moon_hitpoints_exhausted")
 	moon.global_position = player_start_pos
 	moon.move_vec = moon.initial_vel
 	camera.global_position = player_start_pos
@@ -76,6 +77,7 @@ func set_current_influence(influence_body: InfluenceBody) -> void:
 
 
 func _ready() -> void:
+	get_tree().paused = true
 	if not debug:
 		$HUD/DebugLabel.call_deferred("free")
 	connect_astrobody_signals(sun.get_children())
@@ -211,3 +213,9 @@ func _on_Sun_sun_collided_with(area: Node2D) -> void:
 
 func _on_Moon_hitpoints_exhausted() -> void:
 	kill_player("planet")
+
+
+func _on_IntroLabel_any_key_pressed() -> void:
+	$HUD/IntroLabel.visible = false
+	$HUD/IntroLabel.call_deferred("free")
+	get_tree().paused = false

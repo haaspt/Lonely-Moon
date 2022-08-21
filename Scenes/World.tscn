@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/World.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/AstroBody.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Assets/starfield.jpeg" type="Texture" id=5]
 [ext_resource path="res://Assets/Music/airtone_spacedust.mp3" type="AudioStream" id=6]
 [ext_resource path="res://Assets/Font/theme.tres" type="Theme" id=7]
+[ext_resource path="res://Scenes/IntroLabel.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -35,25 +36,25 @@ rotation_speed = 5.0
 
 [node name="AstroBody" parent="Sun" instance=ExtResource( 2 )]
 position = Vector2( -1698.29, -250.017 )
-rotation = 3343.43
+rotation = 4382.94
 body_radius = 400.0
 body_mass = 69333.3
 rotation_speed = 5.0
 
 [node name="AstroBody3" parent="Sun/AstroBody" instance=ExtResource( 2 )]
 position = Vector2( 345.35, 687.608 )
-rotation = 9469.99
+rotation = 12587.6
 body_radius = 50.0
 body_mass = 3600.0
 
 [node name="AstroBody2" parent="Sun" instance=ExtResource( 2 )]
 position = Vector2( 2073.16, 2800.9 )
-rotation = 9469.17
+rotation = 12586.8
 body_radius = 900.0
 body_mass = 384000.0
 
 [node name="Moon" parent="." instance=ExtResource( 3 )]
-position = Vector2( -2, 1702 )
+position = Vector2( 0, 1700 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( -2, 1702 )
@@ -76,6 +77,7 @@ environment = SubResource( 1 )
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="DebugLabel" type="Label" parent="HUD"]
+visible = false
 margin_right = 41.0
 margin_bottom = 14.0
 text = "Lorem"
@@ -101,5 +103,13 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
+[node name="IntroLabel" parent="HUD" instance=ExtResource( 8 )]
+margin_top = -280.0
+margin_bottom = 280.0
+
+[node name="PlayerStartPos" type="Node2D" parent="."]
+position = Vector2( 0, 1700 )
+
 [connection signal="sun_collided_with" from="Sun" to="." method="_on_Sun_sun_collided_with"]
 [connection signal="hitpoints_exhausted" from="Moon" to="." method="_on_Moon_hitpoints_exhausted"]
+[connection signal="any_key_pressed" from="HUD/IntroLabel" to="." method="_on_IntroLabel_any_key_pressed"]

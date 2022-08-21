@@ -78,7 +78,7 @@ func set_hit_points(new_points: int) -> void:
 	var lerp_val := float(hit_points) / float(total_hit_points)
 	var color := Color(1, lerp_val, lerp_val, 1)
 	sprite.modulate = color
-	if hit_points == 0:
+	if hit_points <= 0:
 		emit_signal("hitpoints_exhausted")
 
 
