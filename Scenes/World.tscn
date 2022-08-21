@@ -16,6 +16,7 @@ glow_enabled = true
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
+debug = false
 camera_lean_amount = 200.0
 
 [node name="Background" type="TextureRect" parent="."]
@@ -36,85 +37,85 @@ rotation_speed = 5.0
 
 [node name="AstroBody" parent="Sun" instance=ExtResource( 2 )]
 position = Vector2( -5637.48, -4052.45 )
-rotation = 4525.68
+rotation = 4532.38
 body_radius = 400.0
 body_mass = 69333.3
 rotation_speed = 5.0
 
 [node name="AstroBody3" parent="Sun/AstroBody" instance=ExtResource( 2 )]
 position = Vector2( 345.35, 687.608 )
-rotation = 13013.4
+rotation = 13033.3
 body_radius = 50.0
 body_mass = 3600.0
 
 [node name="AstroBody4" parent="Sun" instance=ExtResource( 2 )]
 position = Vector2( -4575.12, 291.918 )
-rotation = 4524.8
+rotation = 4531.5
 body_radius = 400.0
 body_mass = 69333.3
 rotation_speed = 5.0
 
 [node name="AstroBody3" parent="Sun/AstroBody4" instance=ExtResource( 2 )]
 position = Vector2( 345.35, 687.608 )
-rotation = 13013.4
+rotation = 13033.3
 body_radius = 50.0
 body_mass = 3600.0
 
 [node name="AstroBody2" parent="Sun" instance=ExtResource( 2 )]
 position = Vector2( 2073.16, 2800.9 )
-rotation = 13012.6
+rotation = 13032.5
 body_radius = 900.0
 body_mass = 384000.0
 
 [node name="AstroBody3" parent="Sun" instance=ExtResource( 2 )]
 position = Vector2( 1499.95, -5336.03 )
-rotation = 642.198
+rotation = 647.501
 body_radius = 1000.0
 body_mass = 768000.0
 rotation_speed = 4.0
 
 [node name="AstroBody" parent="Sun/AstroBody3" instance=ExtResource( 2 )]
 position = Vector2( 2807.18, -1361.58 )
-rotation = 854.33
+rotation = 874.293
 body_radius = 50.0
 body_mass = 20000.0
 
 [node name="AstroBody2" parent="Sun/AstroBody3" instance=ExtResource( 2 )]
 position = Vector2( -1491.9, -1512.21 )
-rotation = 851.794
+rotation = 871.757
 
 [node name="AstroBody5" parent="Sun" instance=ExtResource( 2 )]
 position = Vector2( -4470.62, 5594.81 )
-rotation = 641.893
+rotation = 647.196
 body_radius = 1000.0
 body_mass = 768000.0
 rotation_speed = 4.0
 
 [node name="AstroBody" parent="Sun/AstroBody5" instance=ExtResource( 2 )]
 position = Vector2( 2807.18, -1361.58 )
-rotation = 854.33
+rotation = 874.293
 body_radius = 50.0
 body_mass = 40000.0
 
 [node name="AstroBody2" parent="Sun/AstroBody5" instance=ExtResource( 2 )]
 position = Vector2( -1491.9, -1512.21 )
-rotation = 851.794
+rotation = 871.757
 body_radius = 90.0
 body_mass = 40000.0
 
 [node name="AstroBody3" parent="Sun/AstroBody5" instance=ExtResource( 2 )]
 position = Vector2( 958.587, 1217.11 )
-rotation = 850.454
+rotation = 870.417
 body_radius = 20.0
 
 [node name="AstroBody6" parent="Sun" instance=ExtResource( 2 )]
 position = Vector2( -3131.85, -1987.44 )
-rotation = 966.721
+rotation = 1019.99
 rotation_speed = 40.0
 
 [node name="AstroBody" parent="Sun/AstroBody6" instance=ExtResource( 2 )]
 position = Vector2( -710.037, -173.531 )
-rotation = 735.884
+rotation = 755.847
 __meta__ = {
 "_edit_lock_": true
 }
@@ -123,7 +124,7 @@ body_mass = 40000.0
 
 [node name="AstroBody2" parent="Sun/AstroBody6" instance=ExtResource( 2 )]
 position = Vector2( 792.123, 99.6733 )
-rotation = 734.03
+rotation = 753.993
 __meta__ = {
 "_edit_lock_": true
 }
