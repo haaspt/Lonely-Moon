@@ -11,9 +11,18 @@ signal radius_exited
 export var body_radius: float = 10.0 setget set_body_radius
 export var body_mass: float = 10000.0 setget set_body_mass
 export var rotation_speed: float = 15
+export var texture: Texture
 
 onready var influence_area := $InfluenceArea
 onready var collision_area := $CollisionArea
+onready var sprite := $Sprite
+
+
+func _ready() -> void:
+	sprite.texture = texture
+	var texture_radius := float(texture.get_width()) / 2
+	var scale_factor := body_radius / texture_radius
+	sprite.scale = Vector2(scale_factor, scale_factor)
 
 
 func _process(delta: float) -> void:
