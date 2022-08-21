@@ -15,6 +15,7 @@ var sprite_shaking := false
 var hit_points: int setget set_hit_points
 onready var sprite := $Sprite
 onready var sprite_default_pos: Vector2 = sprite.position
+onready var hit_sfx := $HitSound
 
 
 func _ready() -> void:
@@ -52,6 +53,7 @@ func calc_grav_accel() -> Vector2:
 func shake_sprite() -> void:
 	sprite_shaking = true
 	$ShakeTimer.start()
+	hit_sfx.play()
 
 
 func bounce_off_planet(planet: Node2D) -> void:

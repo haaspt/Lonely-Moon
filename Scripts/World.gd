@@ -19,6 +19,7 @@ onready var sun = $Sun
 onready var camera = $Camera2D
 onready var default_zoom: Vector2 = camera.zoom
 onready var death_label = $HUD/DeathLabel
+onready var death_sfx := $DeathSFX
 
 
 class InfluenceBody:
@@ -122,6 +123,8 @@ func _process(_delta: float) -> void:
 
 func kill_player(cause: String) -> void:
 	moon.call_deferred("free")
+	if cause != "space":
+		death_sfx.play()
 	var cause_str: String = death_label_lookup[cause]
 	cause_str += "\n\nPress 'R' to try again!"
 	death_label.text = cause_str

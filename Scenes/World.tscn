@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scripts/World.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/AstroBody.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Assets/Art/planet_2.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Art/planet_1.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Art/planet_3.png" type="Texture" id=11]
+[ext_resource path="res://Assets/SFX/impactBell_heavy_000.ogg" type="AudioStream" id=12]
 
 [sub_resource type="StreamTexture" id=2]
 flags = 4
@@ -18,8 +19,13 @@ load_path = "res://.import/planet_1.png-fba2fbc4ee401cde4760613ece68e566.stex"
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
-tonemap_mode = 2
+fog_sun_color = Color( 1, 0.901961, 0.701961, 1 )
+fog_sun_amount = 1.0
+tonemap_mode = 3
+tonemap_exposure = 1.91
 glow_enabled = true
+glow_bloom = 1.0
+adjustment_enabled = true
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -44,7 +50,7 @@ rotation_speed = 5.0
 
 [node name="AstroBody" parent="Sun" instance=ExtResource( 2 )]
 position = Vector2( -5637.48, -4052.45 )
-rotation = 5469.77
+rotation = 5569.35
 body_radius = 400.0
 body_mass = 69333.3
 rotation_speed = 5.0
@@ -52,7 +58,7 @@ texture = ExtResource( 11 )
 
 [node name="AstroBody3" parent="Sun/AstroBody" instance=ExtResource( 2 )]
 position = Vector2( 345.35, 687.608 )
-rotation = 15783.6
+rotation = 16069.0
 body_radius = 50.0
 body_mass = 3600.0
 
@@ -62,7 +68,7 @@ texture = SubResource( 2 )
 
 [node name="AstroBody4" parent="Sun" instance=ExtResource( 2 )]
 position = Vector2( -4579.09, 292.441 )
-rotation = 2608.52
+rotation = 2323.29
 body_radius = 400.0
 body_mass = 69333.3
 rotation_speed = -15.0
@@ -70,21 +76,21 @@ texture = ExtResource( 9 )
 
 [node name="AstroBody3" parent="Sun/AstroBody4" instance=ExtResource( 2 )]
 position = Vector2( 345.35, 687.608 )
-rotation = 15783.6
+rotation = 16069.0
 body_radius = 50.0
 body_mass = 3600.0
 texture = ExtResource( 11 )
 
 [node name="AstroBody2" parent="Sun" instance=ExtResource( 2 )]
 position = Vector2( 2073.16, 2800.9 )
-rotation = 15782.8
+rotation = 16068.2
 body_radius = 900.0
 body_mass = 384000.0
 texture = ExtResource( 10 )
 
 [node name="AstroBody3" parent="Sun" instance=ExtResource( 2 )]
 position = Vector2( 1499.95, -5336.03 )
-rotation = -2048.21
+rotation = -2428.17
 body_radius = 1000.0
 body_mass = 768000.0
 rotation_speed = -20.0
@@ -92,17 +98,17 @@ texture = ExtResource( 11 )
 
 [node name="AstroBody" parent="Sun/AstroBody3" instance=ExtResource( 2 )]
 position = Vector2( 2807.18, -1361.58 )
-rotation = 3625.21
+rotation = 3910.46
 body_radius = 50.0
 body_mass = 20000.0
 
 [node name="AstroBody2" parent="Sun/AstroBody3" instance=ExtResource( 2 )]
 position = Vector2( -1491.9, -1512.21 )
-rotation = 3622.67
+rotation = 3907.93
 
 [node name="AstroBody5" parent="Sun" instance=ExtResource( 2 )]
 position = Vector2( -4475.58, 5595.46 )
-rotation = 2247.18
+rotation = 2439.83
 body_radius = 1000.0
 body_mass = 768000.0
 rotation_speed = 10.0
@@ -110,32 +116,32 @@ texture = ExtResource( 9 )
 
 [node name="AstroBody" parent="Sun/AstroBody5" instance=ExtResource( 2 )]
 position = Vector2( 2807.18, -1361.58 )
-rotation = 3625.21
+rotation = 3910.46
 body_radius = 50.0
 body_mass = 40000.0
 texture = ExtResource( 11 )
 
 [node name="AstroBody2" parent="Sun/AstroBody5" instance=ExtResource( 2 )]
 position = Vector2( -1491.9, -1512.21 )
-rotation = 3622.67
+rotation = 3907.93
 body_radius = 90.0
 body_mass = 40000.0
 texture = ExtResource( 9 )
 
 [node name="AstroBody3" parent="Sun/AstroBody5" instance=ExtResource( 2 )]
 position = Vector2( 958.587, 1217.11 )
-rotation = 3621.34
+rotation = 3906.59
 body_radius = 20.0
 texture = ExtResource( 10 )
 
 [node name="AstroBody6" parent="Sun" instance=ExtResource( 2 )]
 position = Vector2( -3131.85, -1987.44 )
-rotation = 8354.9
+rotation = 9119.59
 rotation_speed = 40.0
 
 [node name="AstroBody" parent="Sun/AstroBody6" instance=ExtResource( 2 )]
 position = Vector2( -710.037, -173.531 )
-rotation = 3507.32
+rotation = 3792.56
 __meta__ = {
 "_edit_lock_": true
 }
@@ -145,7 +151,7 @@ texture = ExtResource( 11 )
 
 [node name="AstroBody2" parent="Sun/AstroBody6" instance=ExtResource( 2 )]
 position = Vector2( 792.123, 99.6733 )
-rotation = 3505.47
+rotation = 3790.71
 __meta__ = {
 "_edit_lock_": true
 }
@@ -173,6 +179,10 @@ drag_margin_v_enabled = true
 pause_mode = 2
 stream = ExtResource( 6 )
 bus = "Background"
+
+[node name="DeathSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+bus = "SFX"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
