@@ -15,6 +15,7 @@ Lonely Moon was created for the [Godot Wild Jam](https://itch.io/jam/godot-wild-
 - Art by Alyssa Johnson
 - Music: [spacedust by airtone](http://dig.ccmixter.org/files/airtone/64741) (c) copyright 2022 Licensed under a Creative Commons Attribution (3.0) license.
 - Font: [at01 Pixel Font by GrafxKid](https://itch.io/queue/c/733269/godot-pixel-fonts?game_id=707314) Public Domain (CC0 1.0).
+- Sounds: [Interface Sounds by KennyNL](https://www.kenney.nl/assets/interface-sounds) Creative Commons Zero, CC0.
 
 ## Notes
 
