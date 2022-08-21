@@ -12,12 +12,12 @@ var death_label_lookup := {
 	"space": "Oh no! You flew off into deep space!",
 	"planet": "Ooph! You crashed into a planet too many times!"
 }
-var default_zoom := Vector2(1.5, 1.5)
 var max_zoom := Vector2(4.5, 4.5)
 onready var player_start_pos: Vector2 = $PlayerStartPos.global_position
 onready var moon = $Moon
 onready var sun = $Sun
 onready var camera = $Camera2D
+onready var default_zoom: Vector2 = camera.zoom
 onready var death_label = $HUD/DeathLabel
 
 

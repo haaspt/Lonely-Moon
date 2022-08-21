@@ -9,7 +9,7 @@ export var speed := 10
 export var rotation_speed := 10
 export var total_hit_points: int = 4
 var parent_body: Node2D
-var initial_vel := Vector2.LEFT * 50
+var initial_vel := Vector2.LEFT * 75
 var move_vec := initial_vel
 var sprite_shaking := false
 var hit_points: int setget set_hit_points
