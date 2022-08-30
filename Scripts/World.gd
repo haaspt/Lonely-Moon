@@ -20,6 +20,7 @@ onready var camera = $Camera2D
 onready var default_zoom: Vector2 = camera.zoom
 onready var death_label = $HUD/DeathLabel
 onready var death_sfx := $DeathSFX
+onready var move_trail := $MoveTrail
 
 
 class InfluenceBody:
@@ -68,6 +69,7 @@ func reset_player_pos() -> void:
 	camera.global_position = player_start_pos
 	camera_focus = player_start_pos
 	death_label.visible = false
+	move_trail.clear_points()
 
 
 func set_current_influence(influence_body: InfluenceBody) -> void:
@@ -119,6 +121,10 @@ func _process(_delta: float) -> void:
 			debug_string += "Act. Bod.: " + str(current_influence.body.name) + "\n"
 			debug_string += "Hit Pts.: " + str(moon.hit_points)
 			$HUD/DebugLabel.text = debug_string
+	if get_node_or_null("Moon"):
+		move_trail.add_point_and_truncate(moon.position)
+	else:
+		move_trail.clear_points()
 
 
 func kill_player(cause: String) -> void:

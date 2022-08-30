@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/MoveTrail.gd" type="Script" id=1]
+
+[sub_resource type="Curve" id=1]
+max_value = 2.0
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.990196, 2 ), 0.0, 0.0, 0, 0 ]
+
+[node name="MoveTrail" type="Line2D"]
+width_curve = SubResource( 1 )
+script = ExtResource( 1 )
